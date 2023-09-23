@@ -1,24 +1,16 @@
 package org.example.smarthome;
 
-import java.util.ArrayList;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
 import java.util.Collection;
 
+@Getter
+@RequiredArgsConstructor
 public class SmartHome {
-    Collection<Room> rooms;
-
-    public SmartHome() {
-        rooms = new ArrayList<>();
-    }
-
-    public SmartHome(Collection<Room> rooms) {
-        this.rooms = rooms;
-    }
+    private final Collection<Room> rooms;
 
     public void addRoom(Room room) {
         rooms.add(room);
-    }
-
-    public Collection<Room> getRooms() {
-        return rooms;
     }
 }

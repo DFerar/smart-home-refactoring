@@ -1,30 +1,16 @@
 package org.example.smarthome;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.example.smarthome.devices.Door;
 import org.example.smarthome.devices.Light;
 
 import java.util.Collection;
 
+@Getter
+@RequiredArgsConstructor
 public class Room {
-    private Collection<Light> lights;
-    private Collection<Door> doors;
-    private String name;
-
-    public Room(Collection<Light> lights, Collection<Door> doors, String name) {
-        this.lights = lights;
-        this.doors = doors;
-        this.name = name;
-    }
-
-    public Collection<Light> getLights() {
-        return lights;
-    }
-
-    public Collection<Door> getDoors() {
-        return doors;
-    }
-
-    public String getName() {
-        return name;
-    }
+    private final Collection<Light> lights;
+    private final Collection<Door> doors;
+    private final String name;
 }
