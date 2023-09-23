@@ -1,4 +1,4 @@
-package org.example;
+package org.example.smarthome;
 
 import java.util.ArrayList;
 import java.util.Collection;

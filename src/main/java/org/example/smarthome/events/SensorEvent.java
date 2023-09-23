@@ -1,4 +1,4 @@
-package org.example;
+package org.example.smarthome.events;
 
 public class SensorEvent {
     private final SensorEventType type;

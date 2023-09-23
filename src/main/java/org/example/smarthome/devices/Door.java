@@ -1,6 +1,6 @@
-package org.example;
+package org.example.smarthome.devices;
 
-public class Door {
+public class Door implements Device{
     private final String id;
     private boolean isOpen;
 
@@ -9,6 +9,7 @@ public class Door {
         this.id = id;
     }
 
+    @Override
     public String getId() {
         return id;
     }
