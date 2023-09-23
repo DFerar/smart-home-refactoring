@@ -1,4 +1,7 @@
-package org.example;
+package org.example.smarthome;
+
+import org.example.smarthome.devices.Door;
+import org.example.smarthome.devices.Light;
 
 import java.util.Collection;
 

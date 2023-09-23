@@ -1,6 +1,6 @@
-package org.example;
+package org.example.smarthome.devices;
 
-public class Light {
+public class Light implements Device {
     private boolean isOn;
     private final String id;
 
@@ -13,6 +13,7 @@ public class Light {
         return isOn;
     }
 
+    @Override
     public String getId() {
         return id;
     }

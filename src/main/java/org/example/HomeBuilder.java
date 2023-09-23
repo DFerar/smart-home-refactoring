@@ -2,6 +2,10 @@ package org.example;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.example.smarthome.devices.Door;
+import org.example.smarthome.devices.Light;
+import org.example.smarthome.Room;
+import org.example.smarthome.SmartHome;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

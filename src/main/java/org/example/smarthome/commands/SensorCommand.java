@@ -1,4 +1,6 @@
-package org.example;
+package org.example.smarthome.commands;
+
+import org.example.smarthome.commands.CommandType;
 
 public class SensorCommand {
     private final CommandType type;
