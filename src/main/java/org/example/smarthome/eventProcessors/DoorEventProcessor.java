@@ -15,6 +15,7 @@ public class DoorEventProcessor implements EventProcessor {
 
     @Override
     public void processEvent(SensorEvent event) {
+        //TODO if door is hall => turn off all lights
         for (Room room : smartHome.getRooms()) {
             for (Door door : room.getDoors()) {
                 if (door.getId().equals(event.getObjectId())) {
