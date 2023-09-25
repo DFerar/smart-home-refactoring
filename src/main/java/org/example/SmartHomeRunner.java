@@ -4,10 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.example.smarthome.eventProcessors.EventProcessor;
 import org.example.smarthome.events.EventGenerator;
 import org.example.smarthome.events.SensorEvent;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @RequiredArgsConstructor
+@Component
 public class SmartHomeRunner {
     private final List<EventProcessor> processors;
     private final EventGenerator eventGenerator;

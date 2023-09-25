@@ -6,6 +6,8 @@ import org.example.smarthome.devices.Door;
 import org.example.smarthome.devices.Light;
 import org.example.smarthome.Room;
 import org.example.smarthome.SmartHome;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -14,9 +16,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import static org.example.Application.SMART_HOME_DUMP_FILE;
-
+@PropertySource("classpath:application.yml")
 public class SmartHomeBuilder {
+    @Value("${smart.home.dump.file}")
+    private static String fileName;
 
     public static void main(String[] args) throws IOException {
         SmartHome smartHome = createSmartHome();
@@ -51,7 +54,7 @@ public class SmartHomeBuilder {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String jsonString = gson.toJson(smartHome);
         System.out.println(jsonString);
-        Path path = Paths.get(SMART_HOME_DUMP_FILE);
+        Path path = Paths.get(fileName);
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             writer.write(jsonString);
         }

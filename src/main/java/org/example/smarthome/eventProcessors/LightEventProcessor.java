@@ -5,7 +5,9 @@ import org.example.smarthome.events.SensorEvent;
 import org.example.smarthome.events.SensorEventType;
 import org.example.smarthome.SmartHome;
 import org.example.smarthome.devices.Light;
+import org.springframework.stereotype.Component;
 
+@Component
 public class LightEventProcessor implements  EventProcessor{
     private final SmartHome smartHome;
 

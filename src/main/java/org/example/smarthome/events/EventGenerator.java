@@ -1,6 +1,7 @@
 package org.example.smarthome.events;
 
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -9,6 +10,7 @@ import static java.lang.String.valueOf;
 import static java.util.concurrent.ThreadLocalRandom.current;
 
 @Setter
+@Component
 public class EventGenerator {
     private final ThreadLocalRandom random = current();
     private double stopProbability = 0.05;
