@@ -2,6 +2,9 @@ package org.example.smarthome.events;
 
 
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+
 
 @Getter
 public class SensorEvent {
@@ -12,7 +15,6 @@ public class SensorEvent {
         this.type = type;
         this.objectId = objectId;
     }
-
     @Override
     public String toString() {
         return "SensorEvent{" +

@@ -1,8 +1,11 @@
 package org.example.smarthome;
 
 import org.example.SmartHomeRunner;
+import org.example.smarthome.eventProcessors.DoorEventProcessor;
 import org.example.smarthome.eventProcessors.EventProcessor;
+import org.example.smarthome.eventProcessors.LightEventProcessor;
 import org.example.smarthome.events.EventGenerator;
+import org.example.smarthome.events.SensorEvent;
 import org.example.smarthome.loader.SmartHomeLoader;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

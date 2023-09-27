@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.example.smarthome.devices.Door;
 import org.example.smarthome.devices.Light;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 

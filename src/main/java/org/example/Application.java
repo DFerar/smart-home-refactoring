@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-
+@ComponentScan
 public class Application {
 
     public static void main(String... args) {

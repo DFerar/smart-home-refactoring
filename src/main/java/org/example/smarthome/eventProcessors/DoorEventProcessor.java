@@ -5,6 +5,8 @@ import org.example.smarthome.events.SensorEvent;
 import org.example.smarthome.events.SensorEventType;
 import org.example.smarthome.SmartHome;
 import org.example.smarthome.devices.Door;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,6 +16,7 @@ public class DoorEventProcessor implements EventProcessor {
     public DoorEventProcessor(SmartHome smartHome) {
         this.smartHome = smartHome;
     }
+
 
     @Override
     public void processEvent(SensorEvent event) {
