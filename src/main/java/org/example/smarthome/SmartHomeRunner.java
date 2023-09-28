@@ -1,17 +1,15 @@
-package org.example;
+package org.example.smarthome;
 
 import lombok.RequiredArgsConstructor;
 import org.example.smarthome.eventProcessors.EventProcessor;
 import org.example.smarthome.events.EventGenerator;
 import org.example.smarthome.events.SensorEvent;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @Component
+@RequiredArgsConstructor
 public class SmartHomeRunner {
     private final List<EventProcessor> processors;
     private final EventGenerator eventGenerator;
