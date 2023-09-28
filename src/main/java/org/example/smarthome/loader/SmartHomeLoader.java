@@ -20,8 +20,8 @@ import static java.nio.file.Files.readAllBytes;
 public class SmartHomeLoader {
     @Value("${smart.home.dump.file}")
     private String fileName;
-    @SneakyThrows
 
+    @SneakyThrows
     public SmartHome load() {
         Gson gson = new Gson();
         String json = new String(readAllBytes(Paths.get(fileName)));

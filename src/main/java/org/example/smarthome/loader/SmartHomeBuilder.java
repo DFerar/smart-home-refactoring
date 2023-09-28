@@ -8,6 +8,7 @@ import org.example.smarthome.Room;
 import org.example.smarthome.SmartHome;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

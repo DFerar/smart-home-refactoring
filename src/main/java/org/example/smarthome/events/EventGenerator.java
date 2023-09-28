@@ -1,7 +1,8 @@
 package org.example.smarthome.events;
 
 import lombok.Setter;
-import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -12,9 +13,11 @@ import static java.util.concurrent.ThreadLocalRandom.current;
 
 @Setter
 @Component
+@PropertySource("classpath:application.yml")
 public class EventGenerator {
     private final ThreadLocalRandom random = current();
-    private double stopProbability = 0.05;
+    @Value("${stop.probability}")
+    private double stopProbability;
 
     public SensorEvent generateNextSensorEvent() {
         // pretend like we're getting the events from physical world, but here we're going to just generate some random events

@@ -1,19 +1,10 @@
 package org.example;
 
 import org.example.smarthome.AppConfig;
-import org.example.smarthome.eventProcessors.DoorEventProcessor;
-import org.example.smarthome.eventProcessors.LightEventProcessor;
-import org.example.smarthome.events.EventGenerator;
-import org.example.smarthome.loader.SmartHomeLoader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 
-import java.util.List;
 
-@ComponentScan
 public class Application {
 
     public static void main(String... args) {
