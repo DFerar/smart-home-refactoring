@@ -1,6 +1,7 @@
 package org.example.smarthome.eventProcessors;
 
 import org.example.smarthome.Room;
+import org.example.smarthome.actions.Action;
 import org.example.smarthome.events.SensorEvent;
 import org.example.smarthome.events.SensorEventType;
 import org.example.smarthome.SmartHome;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
+
+import static org.example.smarthome.events.SensorEventType.*;
 
 
 @Component
@@ -19,17 +22,27 @@ public class LightEventProcessor implements EventProcessor {
         this.smartHome = smartHome;
     }
 
+    private Action parseEvent(SensorEvent sensorEvent) {
+        SensorEventType sensorEventType = sensorEvent.getType();
+        if (sensorEventType != LIGHT_ON && sensorEventType != LIGHT_OFF) {
+            return null;
+        }
+        boolean newLightState = (sensorEventType == LIGHT_ON);
+        return object -> {
+            if (!(object instanceof Light light)) {
+                return;
+            }
+            if (light.getId().equals(sensorEvent.getObjectId())) {
+                light.setOn(newLightState);
+            }
+        };
+    }
+
     @Override
     public void processEvent(SensorEvent event) {
-        for (Room room : smartHome.getRooms()) {
-            for (Light light : room.getLights()) {
-                if (light.getId().equals(event.getObjectId())) {
-                    boolean isLightOn = event.getType() == SensorEventType.LIGHT_ON;
-                    light.setOn(isLightOn);
-                    System.out.println("Light " + light.getId() + " in room " + room.getName() +
-                            " was turned " + (isLightOn ? "on" : "off"));
-                }
-            }
+        Action action = parseEvent(event);
+        if (action != null) {
+            smartHome.execute(action);
         }
     }
 }

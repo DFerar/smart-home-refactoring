@@ -1,14 +1,13 @@
 package org.example.smarthome.eventProcessors;
 
-import lombok.RequiredArgsConstructor;
-import org.example.smarthome.Room;
-import org.example.smarthome.devices.Light;
+import org.example.smarthome.actions.Action;
 import org.example.smarthome.events.SensorEvent;
 import org.example.smarthome.events.SensorEventType;
 import org.example.smarthome.SmartHome;
 import org.example.smarthome.devices.Door;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import static org.example.smarthome.events.SensorEventType.*;
 
 @Component
 public class DoorEventProcessor implements EventProcessor {
@@ -18,42 +17,28 @@ public class DoorEventProcessor implements EventProcessor {
         this.smartHome = smartHome;
     }
 
+    private Action parseEvent(SensorEvent sensorEvent) {
+        SensorEventType sensorEventType = sensorEvent.getType();
+        if (sensorEventType != DOOR_CLOSED && sensorEventType != DOOR_OPEN) {
+            return null;
+        }
+        boolean newDoorState = (sensorEventType == DOOR_OPEN);
+        return object -> {
+            if (!(object instanceof Door door)) {
+                return;
+            }
+            if (door.getId().equals(sensorEvent.getObjectId())) {
+                door.setOpen(newDoorState);
+            }
+        };
+    }
+
+
     @Override
     public void processEvent(SensorEvent event) {
-        boolean isDoorOpen = event.getType() == SensorEventType.DOOR_OPEN;
-        RoomAndDoor roomAndDoor = findRoomAndDoorForEvent(event);
-        if (roomAndDoor == null) return;
-
-        roomAndDoor.door.setOpen(isDoorOpen);
-        System.out.println("Door " + roomAndDoor.door.getId() + " in room " + roomAndDoor.room.getName() +
-            " was " + (isDoorOpen ? "opened" : "closed"));
-        turnOffAllLightsIfHallDoor(isDoorOpen, roomAndDoor.room);
-    }
-
-    private RoomAndDoor findRoomAndDoorForEvent(SensorEvent event) {
-        for (Room room : smartHome.getRooms()) {
-            for (Door door : room.getDoors()) {
-                if (door.getId().equals(event.getObjectId())) {
-                    return new RoomAndDoor(room, door);
-                }
-            }
+        Action action = parseEvent(event);
+        if (action != null) {
+            smartHome.execute(action);
         }
-        return null;
-    }
-
-    private void turnOffAllLightsIfHallDoor(boolean isDoorOpen, Room room) {
-        if (!room.getName().equals("hall") || !isDoorOpen) return;
-
-        for (Room homeRoom : smartHome.getRooms()) {
-            for (Light light : homeRoom.getLights()) {
-                light.setOn(false);
-            }
-        }
-    }
-
-    @RequiredArgsConstructor
-    private static class RoomAndDoor {
-        private final Room room;
-        private final Door door;
     }
 }
